@@ -1,0 +1,30 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: conversion-service
+          uri: lb://CONVERSION-SERVICE
+          predicates:
+            - Path=/api/convert/**
+        - id: processing-service
+          uri: lb://PROCESSING-SERVICE
+          predicates:
+            - Path=/api/process/**
+        - id: metadata-service
+          uri: lb://METADATA-SERVICE
+          predicates:
+            - Path=/api/metadata/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
