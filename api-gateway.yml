@@ -4,19 +4,29 @@ server:
 spring:
   cloud:
     gateway:
-      routes:
-        - id: conversion-service
-          uri: lb://CONVERSION-SERVICE
-          predicates:
-            - Path=/api/convert,/api/convert/**
-        - id: processing-service
-          uri: lb://PROCESSING-SERVICE
-          predicates:
-            - Path=/api/process,/api/process/**
-        - id: metadata-service
-          uri: lb://METADATA-SERVICE
-          predicates:
-            - Path=/api/metadata,/api/metadata/**
+      server:
+        webmvc:
+          routes:
+            - id: conversion-service
+              uri: lb://CONVERSION-SERVICE
+              predicates:
+                - name: Path
+                  args:
+                    pattern: /api/convert,/api/convert/**
+
+            - id: processing-service
+              uri: lb://PROCESSING-SERVICE
+              predicates:
+                - name: Path
+                  args:
+                    pattern: /api/process,/api/process/**
+
+            - id: metadata-service
+              uri: lb://METADATA-SERVICE
+              predicates:
+                - name: Path
+                  args:
+                    pattern: /api/metadata,/api/metadata/**
 
 eureka:
   client:
