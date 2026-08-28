@@ -11,19 +11,19 @@ spring:
               predicates:
                 - name: Path
                   args:
-                    pattern: /api/convert,/api/convert/**
+                    pattern: /api/convert/**
             - id: processing-service
               uri: lb://PROCESSING-SERVICE
               predicates:
                 - name: Path
                   args:
-                    pattern: /api/process,/api/process/**
+                    pattern: /api/process/**
             - id: metadata-service
               uri: lb://METADATA-SERVICE
               predicates:
                 - name: Path
                   args:
-                    pattern: /api/metadata,/api/metadata/**
+                    pattern: /api/metadata/**
 eureka:
   client:
     service-url:
