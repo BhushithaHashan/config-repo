@@ -8,15 +8,15 @@ spring:
         - id: conversion-service
           uri: lb://CONVERSION-SERVICE
           predicates:
-            - Path=/api/convert/,/api/convert/**
+            - Path=/api/convert,/api/convert/**
         - id: processing-service
           uri: lb://PROCESSING-SERVICE
           predicates:
-            - Path=/api/process/,/api/process/**
+            - Path=/api/process,/api/process/**
         - id: metadata-service
           uri: lb://METADATA-SERVICE
           predicates:
-            - Path=/api/metadata/,/api/metadata/**
+            - Path=/api/metadata,/api/metadata/**
 
 eureka:
   client:
