@@ -1,11 +1,6 @@
 server:
   port: ${SERVER_PORT:8080}
-
 spring:
-  application:
-    name: api-gateway
-  config:
-    import: "optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}"
   cloud:
     gateway:
       server:
@@ -16,29 +11,25 @@ spring:
               predicates:
                 - name: Path
                   args:
-                    pattern: /api/convert/**
-
+                    pattern: /api/convert,/api/convert/**
             - id: processing-service
               uri: lb://PROCESSING-SERVICE
               predicates:
                 - name: Path
                   args:
-                    pattern: /api/process/**
-
+                    pattern: /api/process,/api/process/**
             - id: metadata-service
               uri: lb://METADATA-SERVICE
               predicates:
                 - name: Path
                   args:
-                    pattern: /api/metadata/**
-
+                    pattern: /api/metadata,/api/metadata/**
 eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
-
 management:
   endpoints:
     web:
       exposure:
-        include: health, info, gateway
+        include: health,info,gateway
