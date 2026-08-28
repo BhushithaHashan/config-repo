@@ -6,20 +6,6 @@ spring:
     gateway:
       server:
         webmvc:
-          globalcors:
-            add-to-simple-url-handler-mapping: true
-            cors-configurations:
-              '[/**]':
-                allowedOriginPatterns: "*"
-                allowedMethods:
-                  - GET
-                  - POST
-                  - PUT
-                  - DELETE
-                  - OPTIONS
-                allowedHeaders: "*"
-                allowCredentials: false
-
           routes:
             - id: conversion-service
               uri: lb://CONVERSION-SERVICE
@@ -27,6 +13,16 @@ spring:
                 - name: Path
                   args:
                     pattern: /api/convert/**
+              metadata:
+                cors:
+                  allowedOrigins: "*"
+                  allowedMethods:
+                    - GET
+                    - POST
+                    - PUT
+                    - DELETE
+                    - OPTIONS
+                  allowedHeaders: "*"
 
             - id: processing-service
               uri: lb://PROCESSING-SERVICE
@@ -34,6 +30,16 @@ spring:
                 - name: Path
                   args:
                     pattern: /api/process/**
+              metadata:
+                cors:
+                  allowedOrigins: "*"
+                  allowedMethods:
+                    - GET
+                    - POST
+                    - PUT
+                    - DELETE
+                    - OPTIONS
+                  allowedHeaders: "*"
 
             - id: metadata-service
               uri: lb://METADATA-SERVICE
@@ -41,6 +47,16 @@ spring:
                 - name: Path
                   args:
                     pattern: /api/metadata/**
+              metadata:
+                cors:
+                  allowedOrigins: "*"
+                  allowedMethods:
+                    - GET
+                    - POST
+                    - PUT
+                    - DELETE
+                    - OPTIONS
+                  allowedHeaders: "*"
 
 eureka:
   client:
